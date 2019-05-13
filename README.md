@@ -2,7 +2,7 @@
 
 The Python script and Mathematica notebook can be used to compute resource costs of distillation protocols. 
 
-Note that the numbers in the Python script become unreliable for output errors smaller than ~10^(-13) due to the limit of machine-precision numbers. In principle, it is possible to implement arbitrary-precision arithmetic with complex numbers in Python, but it is a bit of a hassle. This work was originally done in Mathematica, which natively supports arbitrary-precision arithmetic. If you require higher precision, use the Mathematica notebook.
+Note that the numbers in the Python script become unreliable for output errors smaller than ~10^(-13) due to the limit of machine-precision numbers. In principle, it is possible to implement arbitrary-precision arithmetic with complex numbers in Python, but it's a bit of a hassle. This work was originally done in Mathematica, which natively supports arbitrary-precision arithmetic. If you require higher precision, use the Mathematica notebook.
 
 # Mathematica notebook
 
