@@ -111,8 +111,8 @@ def cost_of_one_level_15to1(pphys, dx, dz, dm):
     def logerr2(d):
         return 20284 / pout * d * plog(pphys, d) - 0.01
 
-    reqdist1 = 2 * round(optimize.root_scalar(logerr1, bracket=[1, 10000], method='brentq').root / 2) + 1
-    reqdist2 = 2 * round(optimize.root_scalar(logerr2, bracket=[1, 10000], method='brentq').root / 2) + 1
+    reqdist1 = int(2 * round(optimize.root(logerr1, 3, method='hybr').x[0] / 2) + 1)
+    reqdist2 = int(2 * round(optimize.root(logerr2, 3, method='hybr').x[0] / 2) + 1)
 
     # Print output error, failure probability, space cost, time cost and space-time cost
     print('15-to-1 with pphys=', pphys, ', dx=', dx, ', dz=', dz, ', dm=', dm, sep='')

@@ -156,8 +156,8 @@ def cost_of_one_level_15to1_small_footprint(pphys, dx, dz, dm):
     def logerr2(d):
         return 20284 / pout * d * plog(pphys, d) - 0.01
 
-    reqdist1 = 2 * round(optimize.root_scalar(logerr1, bracket=[1, 10000], method='brentq').root / 2) + 1
-    reqdist2 = 2 * round(optimize.root_scalar(logerr2, bracket=[1, 10000], method='brentq').root / 2) + 1
+    reqdist1 = int(2 * round(optimize.root(logerr1, 3, method='hybr').x[0] / 2) + 1)
+    reqdist2 = int(2 * round(optimize.root(logerr2, 3, method='hybr').x[0] / 2) + 1)
 
     # Print output error, failure probability, space cost, time cost and space-time cost
     print('Small-footprint 15-to-1 with pphys=', pphys, ', dx=', dx, ', dz=', dz, ', dm=', dm, sep='')
@@ -360,8 +360,8 @@ def cost_of_two_level_15to1_small_footprint(pphys, dx, dz, dm, dx2, dz2, dm2):
     def logerr2(d):
         return 20284 / pout * d * plog(pphys, d) - 0.01
 
-    reqdist1 = 2 * round(optimize.root_scalar(logerr1, bracket=[1, 10000], method='brentq').root / 2) + 1
-    reqdist2 = 2 * round(optimize.root_scalar(logerr2, bracket=[1, 10000], method='brentq').root / 2) + 1
+    reqdist1 = int(2 * round(optimize.root(logerr1, 3, method='hybr').x[0] / 2) + 1)
+    reqdist2 = int(2 * round(optimize.root(logerr2, 3, method='hybr').x[0] / 2) + 1)
 
     # Print output error, failure probability, space cost, time cost and space-time cost
     nqubits = 2 * ((dx2 + 4 * dz2) * (dx2 + dm2) + (dx + 4 * dz) * (dx + 4 * dm) + 6 * dm2 * dm2)
