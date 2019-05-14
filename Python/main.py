@@ -5,13 +5,15 @@ from twolevel8toCCZ import cost_of_two_level_8toccz
 from smallfootprint import cost_of_one_level_15to1_small_footprint
 from smallfootprint import cost_of_two_level_15to1_small_footprint
 
-# You can use the following functions to calculate resource costs:
-# cost_of_one_level_15to1(pphys, dx, dz, dm)
-# cost_of_two_level_15to1(pphys, dx, dz, dm, dx2, dz2, dm2, nl1)
-# cost_of_two_level_20to4(pphys, dx, dz, dm, dx2, dz2, dm2, nl1)
-# cost_of_two_level_8toccz(pphys, dx, dz, dm, dx2, dz2, dm2, nl1)
-# cost_of_one_level_15to1_small_footprint(pphys, dx, dz, dm)
-# cost_of_two_level_15to1_small_footprint(pphys, dx, dz, dm, dx2, dz2, dm2)
+'''
+You can use the following functions to calculate resource costs:
+cost_of_one_level_15to1(pphys, dx, dz, dm)
+cost_of_two_level_15to1(pphys, dx, dz, dm, dx2, dz2, dm2, nl1)
+cost_of_two_level_20to4(pphys, dx, dz, dm, dx2, dz2, dm2, nl1)
+cost_of_two_level_8toccz(pphys, dx, dz, dm, dx2, dz2, dm2, nl1)
+cost_of_one_level_15to1_small_footprint(pphys, dx, dz, dm)
+cost_of_two_level_15to1_small_footprint(pphys, dx, dz, dm, dx2, dz2, dm2)
+'''
 
 print('----- pphys = 10^(-4) -----')
 cost_of_one_level_15to1(0.0001, 7, 3, 3)
