@@ -1,6 +1,6 @@
 # Resource-cost estimates for magic state distillation
 
-The Python script and Mathematica notebook can be used to compute the resource costs of the distillation protocols introduced in arXiv:1905.XXXXX. 
+The Python script and Mathematica notebook can be used to compute the resource costs of the distillation protocols introduced in [arXiv:1905.06903](https://arxiv.org/abs/1905.06903). 
 
 Note that the numbers in the Python script become unreliable for output errors smaller than ~10^(-13) due to the limit of machine-precision numbers. In principle, it is possible to implement arbitrary-precision arithmetic with complex numbers in Python, but it's a bit of a hassle. This work was originally done in Mathematica, which natively supports arbitrary-precision arithmetic. If you require higher precision, use the Mathematica notebook.
 
