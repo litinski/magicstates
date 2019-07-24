@@ -30,19 +30,23 @@ def cost_of_two_level_8toccz(pphys, dx, dz, dm, dx2, dz2, dm2, nl1):
 
     # Step 1 of (15-to-1)x(8-to-CCZ) protocol applying rotations 1-2
     # Last operation: apply additional storage errors due to multi-patch measurements
-    out2 = apply_rot(init4qubit, [z, one, one, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + 3 * dx2 + dz2 + dm2) * pm2, 0)
-    out2 = apply_rot(out2, [one, one, one, -1 * z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + dz2 + dm2) * pm2, 0)
-    out2 = storage_z_4(out2, 0.5 * (dm2 / dx2) * px2 * dm2, 0, 0, 0.5 * (2 * dm2 / dz2) * pz2 * dm2)
+    out2 = apply_rot(init4qubit, [z, one, one, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (3 * dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = apply_rot(out2, [one, one, one, -1 * z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = storage_z_4(out2, 0.5 * (3 * dx2 + dz2 + dm2) * dm2 / dx2 * px2, 0, 0, 0)
 
     # Apply storage errors for l1time code cycles
     out2 = storage_x_4(out2, 0.5 * px2 * l1time, 0, 0, 0.5 * (dz2 / dx2) * px2 * l1time)
     out2 = storage_z_4(out2, 0.5 * px2 * l1time, 0, 0, 0.5 * (dx2 / dz2) * pz2 * l1time)
 
     # Step 2: apply rotations 3-4
-    out2 = apply_rot(out2, [-1 * z, z, one, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + 3 * dx2 + dz2 + dm2) * pm2, 0)
-    out2 = apply_rot(out2, [-1 * z, one, z, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + 3 * dx2 + dz2 + dm2) * pm2, 0)
-    out2 = storage_z_4(out2, 0.5 * (2 * dm2 / dx2) * px2 * dm2, 0.5 * (dm2 / dx2) * px2 * dm2,
-                       0.5 * (dm2 / dx2) * px2 * dm2, 0.5 * (2 * dm2 / dz2) * pz2 * dm2)
+    out2 = apply_rot(out2, [-1 * z, z, one, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (3 * dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = apply_rot(out2, [-1 * z, one, z, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (3 * dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = storage_z_4(out2, 0.5 * ((3 * dx2 + dz2 + dm2) + (3 * dx2 + dz2 + dm2)) * dm2 / dx2 * px2,
+                       0.5 * (3 * dx2 + dz2 + dm2) * dm2 / dx2 * px2, 0.5 * (3 * dx2 + dz2 + dm2) * dm2 / dx2 * px2, 0)
 
     # Apply storage errors for l1time code cycles
     out2 = storage_x_4(out2, 0.5 * px2 * l1time, 0.5 * px2 * l1time, 0.5 * px2 * l1time,
@@ -51,30 +55,35 @@ def cost_of_two_level_8toccz(pphys, dx, dz, dm, dx2, dz2, dm2, nl1):
                        0.5 * (dx2 / dz2) * pz2 * l1time)
 
     # Step 3: apply rotations 5-6
-    out2 = apply_rot(out2, [z, z, z, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + 3 * dx2 + dz2 + dm2) * pm2, 0)
-    out2 = apply_rot(out2, [one, -1 * z, z, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + 2 * dx2 + dz2 + dm2) * pm2, 0)
-    out2 = storage_z_4(out2, 0.5 * (dm2 / dx2) * px2 * dm2, 0.5 * (2 * dm2 / dx2) * px2 * dm2,
-                       0.5 * (2 * dm2 / dx2) * px2 * dm2, 0.5 * (2 * dm2 / dz2) * pz2 * dm2)
+    out2 = apply_rot(out2, [z, z, z, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (3 * dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = apply_rot(out2, [one, -1 * z, z, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (2 * dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = storage_z_4(out2, 0.5 * (3 * dx2 + dz2 + dm2) * dm2 / dx2 * px2,
+                       0.5 * ((3 * dx2 + dz2 + dm2) + (2 * dx2 + dz2 + dm2)) * dm2 / dx2 * px2,
+                       0.5 * ((3 * dx2 + dz2 + dm2) + (2 * dx2 + dz2 + dm2)) * dm2 / dx2 * px2, 0)
 
     # Apply storage errors for l1time code cycles
     # Qubit 1 is consumed as an output state: additional storage errors for dx2 code cycles
-    out2 = storage_x_4(out2, 0.5 * px2 * (dx2 + 2 * dm2), 0.5 * px2 * l1time, 0.5 * px2 * l1time,
+    out2 = storage_x_4(out2, 0.5 * px2 * (dm2 + 2 * dx2), 0.5 * px2 * l1time, 0.5 * px2 * l1time,
                        0.5 * (dz2 / dx2) * px2 * l1time)
-    out2 = storage_z_4(out2, 0.5 * px2 * (dx2 + 2 * dm2), 0.5 * px2 * l1time, 0.5 * px2 * l1time,
+    out2 = storage_z_4(out2, 0.5 * px2 * (dm2 + 2 * dx2), 0.5 * px2 * l1time, 0.5 * px2 * l1time,
                        0.5 * (dx2 / dz2) * pz2 * l1time)
 
     # Step 4: apply rotations 7-8
-    out2 = apply_rot(out2, [one, z, one, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + 3 * dx2 + dz2 + dm2) * pm2, 0)
-    out2 = apply_rot(out2, [one, one, z, z], pl1 + 0.5 * lmove * pm2, (lmove / 2 + dx2 + dz2 + dm2) * pm2, 0)
-    out2 = storage_z_4(out2, 0, 0.5 * (dm2 / dx2) * px2 * dm2, 0.5 * (dm2 / dx2) * px2 * dm2,
-                       0.5 * (2 * dm2 / dz2) * pz2 * dm2)
+    out2 = apply_rot(out2, [one, z, one, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (3 * dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = apply_rot(out2, [one, one, z, z], pl1 + 0.5 * lmove * pm2,
+                     0.5 * lmove * pm2 + 0.5 * (dx2 + dz2 + dm2) * dx2 / dm2 * pm2, 0)
+    out2 = storage_z_4(out2, 0, 0.5 * (3 * dx2 + dz2 + dm2) * dm2 / dx2 * px2,
+                       0.5 * (dx2 + dz2 + dm2) * dm2 / dx2 * px2, 0)
 
     # Apply storage errors for l1time code cycles
     # Qubit 2 is consumed as an output state: additional storage errors for dx2 code cycles
     # Qubit 3 is consumed as an output state in the following step: additional storage errors for dx2 code cycles
-    out2 = storage_x_4(out2, 0, 0.5 * px2 * (dx2 + 2 * dm2), 0.5 * px2 * l1time + 0.5 * px2 * (dx2 + 2 * dm2),
+    out2 = storage_x_4(out2, 0, 0.5 * px2 * (dm2 + 2 * dx2), 0.5 * px2 * l1time + 0.5 * px2 * (dm2 + 2 * dx2),
                        0.5 * (dz2 / dx2) * px2 * l1time)
-    out2 = storage_z_4(out2, 0, 0.5 * px2 * (dx2 + 2 * dm2), 0.5 * px2 * l1time + 0.5 * px2 * (dx2 + 2 * dm2),
+    out2 = storage_z_4(out2, 0, 0.5 * px2 * (dm2 + 2 * dx2), 0.5 * px2 * l1time + 0.5 * px2 * (dm2 + 2 * dx2),
                        0.5 * (dx2 / dz2) * pz2 * l1time)
 
     # Compute level-2 failure probability as the probability to measure qubit 4 in the |+> state
@@ -98,8 +107,8 @@ def cost_of_two_level_8toccz(pphys, dx, dz, dm, dx2, dz2, dm2, nl1):
     reqdist2 = int(2 * round(optimize.root(logerr2, 3, method='hybr').x[0] / 2) + 1)
 
     # Print output error, failure probability, space cost, time cost and space-time cost
-    nqubits = 2 * ((3 * dx2 + dz2) * (dx2 + 4 * dm2) + nl1 * (dx + 4 * dz) * (dx + 4 * dm) + nl1 / 2 * (
-            dx + 4 * dz) * dm2 + 24 * dm2 * dm2)
+    nqubits = 2 * ((3 * dx2 + dz2) * 3 * dx2 + nl1 * (
+                (dx + 4 * dz) * (3 * dx + dm2 / 2) + 2 * dm) + 20 * dm2 * dm2 + 2 * dx2 * dm2)
     ncycles = 4 * l1time / (1 - pfail2)
     print('(15-to-1)x(8-to-CCZ) with pphys=', pphys, ', dx=', dx, ', dz=', dz, ', dm=', dm, ', dx2=', dx2, ', dz2=',
           dz2, ', dm2=', dm2, ', nl1=', nl1, sep='')
